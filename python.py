@@ -21,7 +21,7 @@ def takeArguments(arguments):
 	for argument in arguments:
 		print argument
 
-def returnValue():
+def returnThis():
 	a = "ReturnString"
 	return a
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import unittest
+from python import returnThis
 
 # Here's our "unit".
 def IsOdd(n):
@@ -16,12 +17,17 @@ class IsOddTests(unittest.TestCase):
         self.failIf(IsOdd(2))
 
 class MoreTests(unittest.TestCase):
-	
+
 	def testMoreOne(self):
 		self.failIf(IsOdd(2))
 
 	def testMoreTwo(self):
-		self.failUnless(IsOdd(2))
+		self.failUnless(IsOdd(1))
+
+class PythonTests(unittest.TestCase):
+	def testReturnValue(self):
+		valueOfMethod = returnThis()
+		self.failUnless(valueOfMethod == "ReturnString")
 
 def main():
     unittest.main()
