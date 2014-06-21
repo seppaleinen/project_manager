@@ -42,7 +42,7 @@ def main(args):
 
 	takeArguments(args)
 
-	value = returnValue()
+	value = returnThis()
 
 	print "Value: " + value
 
@@ -52,3 +52,5 @@ def main(args):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
+else:
+	print __name__
