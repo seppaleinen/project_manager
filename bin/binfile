@@ -1,6 +1,8 @@
 #! /usr/bin/python
 
-from package.packagefile import returnWord
+from package.packagefile import returnWord, getWorkspace, traverse
 
 if __name__ == '__main__':
 	print returnWord()
+	print getWorkspace()
+	traverse()
