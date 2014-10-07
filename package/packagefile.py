@@ -10,8 +10,8 @@ def getWorkspace():
 	workspace = os.environ['WORKSPACE']
 	return workspace
 
-def traverse():
-    for cur, _dirs, files in os.walk("."):
+def traverse(directory):
+    for cur, _dirs, files in os.walk(directory):
         pref = ''
         head, tail = os.path.split(cur)
         while head:
