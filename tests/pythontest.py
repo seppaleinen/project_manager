@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from python import returnThis
+from package.python import returnThis
 
 # Here's our "unit".
 def IsOdd(n):
