@@ -1,0 +1,6 @@
+#! /usr/bin/python
+
+from package.packagefile import returnWord
+
+if __name__ == '__main__':
+	print returnWord()
