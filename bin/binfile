@@ -1,8 +1,10 @@
-#! /usr/bin/python
+#!/usr/bin/python
 
-from package.packagefile import returnWord, getWorkspace, traverse
+from package import packagefile
 
 if __name__ == '__main__':
-	print returnWord()
-	print getWorkspace()
- 	traverse(".")
+	print packagefile.returnWord()
+	print packagefile.getWorkspace()
+	directory = raw_input('What directory?: ')
+	#packagefile.executeCommand("find ~/Downloads/Serier/Serier ")
+ 	#packagefile.traverse(directory)

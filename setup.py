@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
     
 setup(
-    name='pyth',
-    version='0.0.14',
+    name='pythontest',
+    version='0.0.1',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
     packages=find_packages(),
     scripts=[ 'bin/binfile' ],
     url='www.google.se',
     zip_safe=False,
-    license='LICENSE.txt',
-    description='Save your code snippets in the cloud.',
+    license='GPLv3',
+    description='Python test.',
     install_requires=[],
     tests_require=[],
     #install_requires=[

@@ -1,7 +1,7 @@
-#! /usr/bin/python
+#!/usr/bin/python
 
 import os
-import fnmatch
+from subprocess import call
 
 def returnWord():
 	return "String"
@@ -11,7 +11,7 @@ def getWorkspace():
 	return workspace
 
 def traverse(directory):
-    for cur, _dirs, files in os.walk(directory):
+    for cur, files in os.walk(directory):
         pref = ''
         head, tail = os.path.split(cur)
         while head:
@@ -20,3 +20,9 @@ def traverse(directory):
         print(pref+tail)
         for f in files:
             print(pref+'---'+f)
+
+def inputFromUser():
+	return input('What directory?: ')
+
+def executeCommand(command):
+	call([command])
