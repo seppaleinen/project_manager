@@ -2,8 +2,6 @@
 
 import os
 import subprocess
-#from subprocess import call
-
 
 def return_word():
     return "String"
@@ -31,9 +29,6 @@ def input_from_user():
 
 def execute_command(command):
     try:
-        #p = subprocess.Popen(["cd", "/bajs"], stdout=subprocess.PIPE)
-        #out, err = p.communicate()
-        #print "OUT", out, "ERR", err
         return subprocess.check_output(["cd", "/opt"])
     except OSError:
         return None

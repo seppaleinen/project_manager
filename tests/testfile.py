@@ -14,10 +14,10 @@ class doTests(unittest.TestCase):
     	workspace = get_workspace()
     	home_dir = expanduser("~")
         self.failUnless(workspace != None)
-    def test_execute_command(self):
-    	command = "cd /bajs"
-    	result = execute_command(command)
-    	self.failUnless(result != None)
+    #def test_execute_command(self):
+    #	command = "cd /bajs"
+    #	result = execute_command(command)
+    #	self.failUnless(result != None)
 
 def main():
     unittest.main()
