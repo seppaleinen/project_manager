@@ -3,12 +3,14 @@
 import os
 from subprocess import call
 
-def returnWord():
-	return "String"
 
-def getWorkspace():
-	workspace = os.environ['WORKSPACE']
-	return workspace
+def return_word():
+    return "String"
+
+
+def get_workspace():
+    return os.environ['WORKSPACE']
+
 
 def traverse(directory):
     for cur, files in os.walk(directory):
@@ -17,12 +19,14 @@ def traverse(directory):
         while head:
             pref += '---'
             head, _tail = os.path.split(head)
-        print(pref+tail)
+        print(pref + tail)
         for f in files:
-            print(pref+'---'+f)
+            print(pref + '---' + f)
 
-def inputFromUser():
-	return input('What directory?: ')
 
-def executeCommand(command):
-	call([command])
+def input_from_user():
+    return input('What directory?: ')
+
+
+def execute_command(command):
+    call([command])

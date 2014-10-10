@@ -3,8 +3,8 @@
 from package import packagefile
 
 if __name__ == '__main__':
-	print packagefile.returnWord()
-	print packagefile.getWorkspace()
-	directory = raw_input('What directory?: ')
-	#packagefile.executeCommand("find ~/Downloads/Serier/Serier ")
- 	#packagefile.traverse(directory)
+    print packagefile.return_word()
+    print packagefile.get_workspace()
+    directory = raw_input('What directory?: ')
+    # packagefile.execute_command("find ~/Downloads/Serier/Serier ")
+    #packagefile.traverse(directory)
