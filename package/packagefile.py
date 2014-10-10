@@ -30,14 +30,10 @@ def input_from_user():
 
 
 def execute_command(command):
-    out = None
     try:
         #p = subprocess.Popen(["cd", "/bajs"], stdout=subprocess.PIPE)
         #out, err = p.communicate()
         #print "OUT", out, "ERR", err
-        out = subprocess.check_output(["cd", "/opt"])
-        print "YES"
-        return out
+        return subprocess.check_output(["cd", "/opt"])
     except OSError:
-        print "NO"
-        return out
+        return None

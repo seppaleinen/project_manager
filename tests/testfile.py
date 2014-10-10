@@ -17,7 +17,7 @@ class doTests(unittest.TestCase):
     def test_execute_command(self):
     	command = "cd /bajs"
     	result = execute_command(command)
-    	print "AWESOME", result
+    	self.failUnless(result != None)
 
 def main():
     unittest.main()
