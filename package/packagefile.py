@@ -9,7 +9,7 @@ def return_word():
 
 
 def get_workspace():
-    return os.environ.get('WORKSPACE')
+    return os.getenv('WORKSPACE', "~/")
 
 
 def traverse(directory):
