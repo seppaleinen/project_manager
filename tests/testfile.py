@@ -3,6 +3,7 @@
 import unittest
 from package.packagefile import return_word
 from package.packagefile import get_workspace
+from package.packagefile import execute_command
 from os.path import expanduser
 
 
@@ -13,6 +14,10 @@ class doTests(unittest.TestCase):
     	workspace = get_workspace()
     	home_dir = expanduser("~")
         self.failUnless(workspace != None)
+    def test_execute_command(self):
+    	command = "cd /bajs"
+    	result = execute_command(command)
+    	print "AWESOME", result
 
 def main():
     unittest.main()

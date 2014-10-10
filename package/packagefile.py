@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 import os
-from subprocess import call
+import subprocess
+#from subprocess import call
 
 
 def return_word():
@@ -29,4 +30,14 @@ def input_from_user():
 
 
 def execute_command(command):
-    call([command])
+    out = None
+    try:
+        #p = subprocess.Popen(["cd", "/bajs"], stdout=subprocess.PIPE)
+        #out, err = p.communicate()
+        #print "OUT", out, "ERR", err
+        out = subprocess.check_output(["cd", "/opt"])
+        print "YES"
+        return out
+    except OSError:
+        print "NO"
+        return out
