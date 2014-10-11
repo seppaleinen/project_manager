@@ -2,6 +2,7 @@
 
 import os
 
+
 def get_workspace():
     """
     Tries to get WORKSPACE env variable
