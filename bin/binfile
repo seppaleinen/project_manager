@@ -1,15 +1,31 @@
 #!/usr/bin/python
 
-from package import packagefile
-from package import finderManager
-from package import gitManager
+from package.packagefile import get_workspace
+from package.finderManager import find_all_git_dirs
+from package.gitManager import git_checkout
+from package.gitManager import git_check_for_updates
+from package.gitManager import git_pull
+from sys import exit
 
-if __name__ == '__main__':
-    for GIT_REPO in finderManager.find_all_git_dirs(packagefile.get_workspace()):
-        branch = gitManager.git_check_for_updates(GIT_REPO)
+def updateGitRepos():
+    for GIT_REPO in find_all_git_dirs(get_workspace()):
+        branch = git_check_for_updates(GIT_REPO)
         if branch != None:
             print("Branch", branch, " in ", GIT_REPO ," is outdated")
-            checkout_result = gitManager.git_checkout(GIT_REPO, branch)
-            pull_result = gitManager.git_pull(GIT_REPO)
+            checkout_result = git_checkout(GIT_REPO, branch)
+            pull_result = git_pull(GIT_REPO)
         else:
             print("Branch ", branch, " in ", GIT_REPO, "is updated")
+
+
+if __name__ == '__main__':
+    print('-----------------------------------------')
+    print('What would you like to do?: enter empty to exit')
+    print('2: Update, build and deploy all outdated gitrepos')
+    input = raw_input('')
+    if input == '1':
+        print('1')
+    elif input == '2':
+        updateGitRepos()
+    else:
+        exit()
