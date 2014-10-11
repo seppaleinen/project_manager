@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-import glob
+import os
 
 def find_all_git_dirs(workspace):
-    print(workspace)
+    return [os.path.join(dirpath, f)
+        for dirpath, dirnames, files in os.walk(workspace)
+        for f in dirnames if f.endswith('.git')]
