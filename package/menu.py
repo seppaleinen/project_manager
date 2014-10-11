@@ -10,16 +10,18 @@ from sys import exit
 
 class Menu():
     def __init__(self):
-        print('-----------------------------------------')
-        print('What would you like to do?: enter empty to exit')
-        print('2: Update, build and deploy all outdated gitrepos')
-        user_input = raw_input('')
-        if user_input == '1':
-            print('1')
-        elif user_input == '2':
-            self.update_git_repos()
-        else:
-            exit()
+        loop = True
+        while loop:
+            print('-----------------------------------------')
+            print('What would you like to do?: enter empty to exit')
+            print('2: Update, build and deploy all outdated gitrepos')
+            user_input = raw_input('')
+            if user_input == '1':
+                print('1')
+            elif user_input == '2':
+                self.update_git_repos()
+            else:
+                loop = False
 
 
     def update_git_repos(self):
