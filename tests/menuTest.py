@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
 
+from package.menu import Menu
 import unittest
 
 
 class doTests(unittest.TestCase):
-	def firstTest(self):
-		self.failIf(self is None)
+    def test_menu__update_git_repos(self):
+        self.failUnless("String" is not None)
 
 
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()

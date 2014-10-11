@@ -5,7 +5,6 @@ from package.finderManager import find_all_git_dirs
 from package.gitManager import git_checkout
 from package.gitManager import git_check_for_updates
 from package.gitManager import git_pull
-from sys import exit
 
 
 class Menu():
