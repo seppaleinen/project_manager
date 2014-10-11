@@ -1,10 +1,15 @@
 #!/usr/bin/python
 
 from package import packagefile
+from package import finderManager
+from package import gitManager
 
 if __name__ == '__main__':
-    print packagefile.return_word()
-    print packagefile.get_workspace()
-    directory = raw_input('What directory?: ')
-    # packagefile.execute_command("find ~/Downloads/Serier/Serier ")
-    #packagefile.traverse(directory)
+    for GIT_REPO in finderManager.find_all_git_dirs(packagefile.get_workspace()):
+        branch = gitManager.git_check_for_updates(GIT_REPO)
+        if branch != None:
+            print("Branch", branch, " in ", GIT_REPO ," is outdated")
+            checkout_result = gitManager.git_checkout(GIT_REPO, branch)
+            pull_result = gitManager.git_pull(GIT_REPO)
+        else:
+            print("Branch ", branch, " in ", GIT_REPO, "is updated")

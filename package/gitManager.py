@@ -10,8 +10,9 @@ def git_pull(git_repo):
     :return result:
     """
     repo = Repo(git_repo)
-    origin = repo.remotes.origin
-    return origin.pull()
+    result = repo.git._call_process("pull")
+    if 'Fast-forward' in result:
+        return 'OK'
 
 
 def git_checkout(git_repo, branch):
@@ -22,8 +23,11 @@ def git_checkout(git_repo, branch):
     :return result:
     """
     repo = Repo(git_repo)
-    git = repo.git
-    return git.checkout(branch)
+    result = repo.git._call_process("checkout", branch)
+    if 'Switched to branch ' in result:
+        return 'OK'
+#    git = repo.git
+#    return git.checkout(branch)
 
 
 def git_check_for_updates(git_repo):
@@ -41,4 +45,4 @@ def git_check_for_updates(git_repo):
     gitResultRows = result.split("\n")
     for row in gitResultRows:
         if "(local out of date)" in row:
-            return row.split("pushes to ")[1].split(" (local out of date")[0]
+            return row.split("pushes to ")[1].split(" (local out of date")[0].strip()

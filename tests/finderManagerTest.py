@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from package.finder import *
+from package.finderManager import *
 from package.packagefile import get_workspace
 
 
