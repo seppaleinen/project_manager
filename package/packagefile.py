@@ -8,6 +8,10 @@ def return_word():
 
 
 def get_workspace():
+    """
+    Tries to get WORKSPACE env variable
+    default is home directory
+    """
     return os.getenv('WORKSPACE', "~/")
 
 
@@ -24,10 +28,17 @@ def traverse(directory):
 
 
 def input_from_user():
+    """
+    Asks for input from user
+    """
     return input('What directory?: ')
 
 
 def execute_command(command):
+    """
+    Execute external command
+    returns result of command or None if error
+    """
     try:
         return subprocess.check_output(["cd", "/opt"])
     except OSError:
