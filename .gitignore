@@ -4,3 +4,4 @@ dist*
 pythontest.egg-info*
 .idea
 *.egg
+target*
