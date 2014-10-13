@@ -18,6 +18,8 @@ class doTests(unittest.TestCase):
 	def test_git_check_for_updates(self):
 		result = git_check_for_updates(project_dir)
 		#self.failUnless(result is None)
+	def test_git_check_for_uncommitted_changes(self):
+		git_check_for_uncommitted_changes(project_dir)
 
 if __name__ == '__main__':
 	unittest.main()
