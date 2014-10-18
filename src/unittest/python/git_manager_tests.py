@@ -10,7 +10,7 @@ class doTests(unittest.TestCase):
 		result = git_pull(project_dir)
 		self.failUnless(result == 'OK')
 	def test_git_checkout(self):
-		branch = "master"
+		branch = "pybuilder"
 		result = git_checkout(project_dir, branch)
 		self.failUnless(result == 'OK')
 	def test_git_check_for_updates(self):
