@@ -44,14 +44,17 @@ def git_check_for_updates(git_repo):
 	parse the branch-name from row and return
 
     :param git_repo:
-    :return result:
+    :return List:
     """
     repo = Repo(git_repo)
     result = repo.git._call_process("remote", "show", "origin")
+    li = []
     git_result_rows = result.split("\n")
     for row in git_result_rows:
         if "(local out of date)" in row:
-            return row.split("pushes to ")[1].split(" (local out of date")[0].strip()
+            out_of_date_branch = row.split("pushes to ")[1].split(" (local out of date")[0].strip()
+            li.append(out_of_date_branch)
+    return li
 
 def git_check_for_uncommitted_changes(git_repo):
     """

@@ -30,32 +30,54 @@ class Menu():
                 loop = False
 
     def check_git_repos(self):
+        """
+        Iterate through all gitrepositories
+        run git remote show origin | grep local out of date
+        and print results
+        :return None:
+        """
         for GIT_REPO in find_all_git_dirs(get_workspace()):
-            branch = git_check_for_updates(GIT_REPO)
-            if branch is not None:
-                print "Branch %s in %s is outdated" % (branch, GIT_REPO)
+            branch_list = git_check_for_updates(GIT_REPO)
+            if branch_list:
+                for branch in branch_list:
+                    print "Branch %s in %s is outdated" % (branch, GIT_REPO)
 
     def update_git_repos(self):
+        """
+        Iterate through all gitrepositories
+        run git remote show origin | grep 'local out of date'
+        checkout all outdated repositories and pull
+        then check if pom.xml, setup.py, or build.gradle exists
+        and compile.
+        :return None:
+        """
         for GIT_REPO in find_all_git_dirs(get_workspace()):
-            branch = git_check_for_updates(GIT_REPO)
-            if branch is not None:
-                print "Branch %s in %s is outdated" % (branch, GIT_REPO)
-                checkout_result = git_checkout(GIT_REPO, branch)
-                pull_result = git_pull(GIT_REPO)
-                if pull_result == 'OK':
-                    dir_to_compile = GIT_REPO.replace('/.git', '')
-                    build_file = CompilingManager(dir_to_compile).file_to_compile
-                    if 'pom.xml' in build_file:
-                        compile_result = MavenManager().mavify_pom_file(build_file)
-                        print('Compileresult: %s' % (compile_result,))
-                    if 'setup.py' in build_file:
-                        print('Compile %s' % (build_file))
-                    if 'build.gradle' in build_file:
-                        print('Compile %s' % (build_file))
+            branch_list = git_check_for_updates(GIT_REPO)
+            if branch_list:
+                for branch in branch_list:
+                    print "Branch %s in %s is outdated" % (branch, GIT_REPO)
+                    checkout_result = git_checkout(GIT_REPO, branch)
+                    pull_result = git_pull(GIT_REPO)
+                    if pull_result == 'OK':
+                        dir_to_compile = GIT_REPO.replace('/.git', '')
+                        build_file = CompilingManager(dir_to_compile).file_to_compile
+                        if 'pom.xml' in build_file:
+                            compile_result = MavenManager().mavify_pom_file(build_file)
+                            print('Compileresult: %s' % (compile_result,))
+                        if 'setup.py' in build_file:
+                            print('Compile %s' % (build_file))
+                        if 'build.gradle' in build_file:
+                            print('Compile %s' % (build_file))
             else:
                 print "All Branches in %s is updated" % (GIT_REPO)
 
     def check_for_uncommitted_changes(self):
+        """
+        Iterate through all gitrepositories
+        run git status | grep Changes not staged for commit
+        and print result
+        :return:
+        """
         for GIT_REPO in find_all_git_dirs(get_workspace()):
             result = git_check_for_uncommitted_changes(GIT_REPO)
             if result is not None:
