@@ -5,3 +5,4 @@ pythontest.egg-info*
 .idea
 *.egg
 target*
+.coverage
