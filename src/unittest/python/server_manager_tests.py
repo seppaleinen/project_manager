@@ -12,7 +12,6 @@ class doTests(unittest.TestCase):
         self.failUnless('pyb' in result)
     def test_get_jboss_base_dir(self):
         result = ServerManager(ps='pyb').get_jboss_dir(split_delimiter='python ')
-        print('result=%s' % (result,))
         self.failIf(result is None)
         self.failIf('pyb' not in result)
 

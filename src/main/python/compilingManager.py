@@ -14,7 +14,7 @@ class CompilingManager():
         self.dir_to_compile = dir_to_compile.replace('/.git', '')
 
     def __get_compiler_type(self):
-        accepted_files = {'setup.py','pom.xml','build.gradle'}
+        accepted_files = {'setup.py','pom.xml','build.gradle','build.py'}
         list = [ f for f in listdir(self.dir_to_compile) if isfile(join(self.dir_to_compile,f)) and f in accepted_files ]
         if list:
             return list[0]
