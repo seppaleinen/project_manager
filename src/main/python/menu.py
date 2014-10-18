@@ -11,7 +11,7 @@ from mavenManager import MavenManager
 
 
 class Menu():
-    def __init__(self):
+    def __init__(self, user_input=None, test=False):
         loop = True
         while loop:
             print('-----------------------------------------')
@@ -19,7 +19,8 @@ class Menu():
             print('1: Check which gitrepos needs updating')
             print('2: Update, build and deploy all outdated gitrepos')
             print('3: Check for uncommitted changes')
-            user_input = raw_input('')
+            if user_input is None:
+                user_input = raw_input('')
             if user_input == '1':
                 self.check_git_repos()
             elif user_input == '2':
@@ -27,6 +28,8 @@ class Menu():
             elif user_input == '3':
                 self.check_for_uncommitted_changes()
             else:
+                loop = False
+            if test:
                 loop = False
 
     def check_git_repos(self):

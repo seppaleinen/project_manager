@@ -6,8 +6,10 @@ import unittest
 
 
 class doTests(unittest.TestCase):
-    def test_menu__update_git_repos(self):
-        self.failUnless("String" is not None)
+    def test_menu_check_git_repos(self):
+        Menu(user_input='1', test=True)
+    def test_menu_check_for_uncommitted_repos(self):
+        Menu(user_input='3', test=True)
 
 
 if __name__ == '__main__':
