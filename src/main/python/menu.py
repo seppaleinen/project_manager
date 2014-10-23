@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 from packagefile import get_workspace
 from finderManager import find_all_git_dirs
 from gitManager import git_checkout
@@ -8,6 +9,19 @@ from gitManager import git_pull
 from gitManager import git_check_for_uncommitted_changes
 from compilingManager import CompilingManager
 from mavenManager import MavenManager
+
+
+def compiler(GIT_REPO, pull_result):
+    if pull_result == 'OK':
+        dir_to_compile = GIT_REPO.replace('/.git', '')
+        build_file = CompilingManager(dir_to_compile).file_to_compile
+        if 'pom.xml' in build_file:
+            compile_result = MavenManager().mavify_pom_file(build_file)
+            print('Compileresult: %s' % (compile_result,))
+        if 'setup.py' in build_file:
+            print('Compile %s' % (build_file))
+        if 'build.gradle' in build_file:
+            print('Compile %s' % (build_file))
 
 
 class Menu():
@@ -61,16 +75,7 @@ class Menu():
                     print "Branch %s in %s is outdated" % (branch, GIT_REPO)
                     checkout_result = git_checkout(GIT_REPO, branch)
                     pull_result = git_pull(GIT_REPO)
-                    if pull_result == 'OK':
-                        dir_to_compile = GIT_REPO.replace('/.git', '')
-                        build_file = CompilingManager(dir_to_compile).file_to_compile
-                        if 'pom.xml' in build_file:
-                            compile_result = MavenManager().mavify_pom_file(build_file)
-                            print('Compileresult: %s' % (compile_result,))
-                        if 'setup.py' in build_file:
-                            print('Compile %s' % (build_file))
-                        if 'build.gradle' in build_file:
-                            print('Compile %s' % (build_file))
+                    compiler(GIT_REPO, pull_result)
             else:
                 print "All Branches in %s is updated" % (GIT_REPO)
 
