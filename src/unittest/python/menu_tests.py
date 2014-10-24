@@ -25,7 +25,7 @@ class doTests(unittest.TestCase):
         compiler(GIT_REPO, pull_result)
 
     def test_compile_pom_xml(self):
-        GIT_REPO=os.getcwd() + '/src/unittest/python/.git'
+        GIT_REPO=os.getcwd() + '/src/unittest/resources/pom/.git'
         pull_result='OK'
         compiler(GIT_REPO, pull_result)
 
