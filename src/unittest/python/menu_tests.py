@@ -4,6 +4,8 @@
 from menu import Menu, compiler
 import os
 import unittest
+import sys
+from StringIO import StringIO
 
 
 class doTests(unittest.TestCase):
@@ -25,19 +27,48 @@ class doTests(unittest.TestCase):
         compiler(GIT_REPO, pull_result)
 
     def test_compile_pom_xml(self):
-        GIT_REPO=os.getcwd() + '/src/unittest/resources/pom/.git'
-        pull_result='OK'
-        compiler(GIT_REPO, pull_result)
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            GIT_REPO=os.getcwd() + '/src/unittest/resources/pom/.git'
+            pull_result='OK'
+            compiler(GIT_REPO, pull_result)
+
+            output = out.getvalue().strip()
+            assert output == 'Compileresult: OK'
+        finally:
+            sys.stdout = saved_stdout
 
     def test_compile_build_gradle(self):
-        GIT_REPO=os.getcwd() + '/src/unittest/resources/gradle/.git'
-        pull_result='OK'
-        compiler(GIT_REPO, pull_result)
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            GIT_REPO=os.getcwd() + '/src/unittest/resources/gradle/.git'
+            pull_result='OK'
+            compiler(GIT_REPO, pull_result)
+
+            output = out.getvalue().strip()
+            expected_output = 'Compile ' + os.getcwd() + '/src/unittest/resources/gradle/build.gradle'
+            assert output == expected_output
+        finally:
+            sys.stdout = saved_stdout
 
     def test_compile_setup_py(self):
-        GIT_REPO=os.getcwd() + '/src/unittest/resources/setup/.git'
-        pull_result='OK'
-        compiler(GIT_REPO, pull_result)
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            GIT_REPO=os.getcwd() + '/src/unittest/resources/setup/.git'
+            pull_result='OK'
+            compiler(GIT_REPO, pull_result)
+
+            output = out.getvalue().strip()
+            expected_output = 'Compile ' + os.getcwd() + '/src/unittest/resources/setup/setup.py'
+            assert output == expected_output
+        finally:
+            sys.stdout = saved_stdout
 
 
 
