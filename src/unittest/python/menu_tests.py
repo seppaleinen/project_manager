@@ -19,10 +19,26 @@ class doTests(unittest.TestCase):
         os.environ["WORKSPACE"] = os.getcwd() + "/.git"
         Menu(user_input='3', test=True)
 
-    def test_compile(self):
+    def test_compile_build_py(self):
         GIT_REPO=os.getcwd() + '/.git'
         pull_result='OK'
         compiler(GIT_REPO, pull_result)
+
+    def test_compile_pom_xml(self):
+        GIT_REPO=os.getcwd() + '/src/unittest/python/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
+
+    def test_compile_build_gradle(self):
+        GIT_REPO=os.getcwd() + '/src/unittest/resources/gradle/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
+
+    def test_compile_setup_py(self):
+        GIT_REPO=os.getcwd() + '/src/unittest/resources/setup/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
+
 
 
 if __name__ == '__main__':

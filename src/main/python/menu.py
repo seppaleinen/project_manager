@@ -22,6 +22,8 @@ def compiler(GIT_REPO, pull_result):
             print('Compile %s' % (build_file))
         if 'build.gradle' in build_file:
             print('Compile %s' % (build_file))
+        if 'build.py' in build_file:
+            print('Compile %s' % (build_file))
 
 
 class Menu():
