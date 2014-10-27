@@ -7,3 +7,5 @@ pythontest.egg-info*
 target*
 !build.py
 .coverage
+!gradle/
+!build.gradle
