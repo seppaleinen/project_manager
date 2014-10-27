@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
+
 import unittest
-from package.finderManager import *
-from package.packagefile import get_workspace
+from finderManager import *
+from packagefile import get_workspace
 
 
 class doTests(unittest.TestCase):

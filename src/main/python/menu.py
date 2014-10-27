@@ -1,17 +1,33 @@
 #!/usr/bin/python
 
-from package.packagefile import get_workspace
-from package.finderManager import find_all_git_dirs
-from package.gitManager import git_checkout
-from package.gitManager import git_check_for_updates
-from package.gitManager import git_pull
-from package.gitManager import git_check_for_uncommitted_changes
-from package.compilingManager import CompilingManager
-from package.mavenManager import MavenManager
+
+from packagefile import get_workspace
+from finderManager import find_all_git_dirs
+from gitManager import git_checkout
+from gitManager import git_check_for_updates
+from gitManager import git_pull
+from gitManager import git_check_for_uncommitted_changes
+from compilingManager import CompilingManager
+from mavenManager import MavenManager
+
+
+def compiler(GIT_REPO, pull_result):
+    if pull_result == 'OK':
+        dir_to_compile = GIT_REPO.replace('/.git', '')
+        build_file = CompilingManager(dir_to_compile).file_to_compile
+        if 'pom.xml' in build_file:
+            compile_result = MavenManager().mavify_pom_file(build_file)
+            print('Compileresult: %s' % (compile_result,))
+        if 'setup.py' in build_file:
+            print('Compile %s' % (build_file))
+        if 'build.gradle' in build_file:
+            print('Compile %s' % (build_file))
+        if 'build.py' in build_file:
+            print('Compile %s' % (build_file))
 
 
 class Menu():
-    def __init__(self):
+    def __init__(self, user_input=None, test=False):
         loop = True
         while loop:
             print('-----------------------------------------')
@@ -19,7 +35,8 @@ class Menu():
             print('1: Check which gitrepos needs updating')
             print('2: Update, build and deploy all outdated gitrepos')
             print('3: Check for uncommitted changes')
-            user_input = raw_input('')
+            if user_input is None:
+                user_input = raw_input('')
             if user_input == '1':
                 self.check_git_repos()
             elif user_input == '2':
@@ -27,6 +44,8 @@ class Menu():
             elif user_input == '3':
                 self.check_for_uncommitted_changes()
             else:
+                loop = False
+            if test:
                 loop = False
 
     def check_git_repos(self):
@@ -58,16 +77,7 @@ class Menu():
                     print "Branch %s in %s is outdated" % (branch, GIT_REPO)
                     checkout_result = git_checkout(GIT_REPO, branch)
                     pull_result = git_pull(GIT_REPO)
-                    if pull_result == 'OK':
-                        dir_to_compile = GIT_REPO.replace('/.git', '')
-                        build_file = CompilingManager(dir_to_compile).file_to_compile
-                        if 'pom.xml' in build_file:
-                            compile_result = MavenManager().mavify_pom_file(build_file)
-                            print('Compileresult: %s' % (compile_result,))
-                        if 'setup.py' in build_file:
-                            print('Compile %s' % (build_file))
-                        if 'build.gradle' in build_file:
-                            print('Compile %s' % (build_file))
+                    compiler(GIT_REPO, pull_result)
             else:
                 print "All Branches in %s is updated" % (GIT_REPO)
 

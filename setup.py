@@ -1,12 +1,12 @@
-from setuptools import setup, find_packages
+from setuptools import setup
     
 setup(
     name='pythontest',
     version='0.0.1',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
-    packages=find_packages(),
-    scripts=[ 'bin/binfile' ],
+    packages=[ 'src/main/python' ],
+    scripts=[ 'src/main/scripts/binfile' ],
     url='www.google.se',
     zip_safe=False,
     license='GPLv3',
@@ -24,5 +24,5 @@ setup(
     #    "wsgiref>=0.1.2",
     #    "xerox"
     #],
-    test_suite="tests",
+    test_suite='src/unittest/python',
 )

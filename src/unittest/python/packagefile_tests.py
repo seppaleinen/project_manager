@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from package.packagefile import get_workspace
+from packagefile import get_workspace
 from os.path import expanduser
 
 

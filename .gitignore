@@ -5,4 +5,7 @@ pythontest.egg-info*
 .idea
 *.egg
 target*
+!build.py
 .coverage
+!gradle/
+!build.gradle
