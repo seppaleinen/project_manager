@@ -3,7 +3,7 @@
 
 import unittest
 import os
-from compilingManager import CompilingManager
+from compiling_manager import CompilingManager
 
 
 class doTests(unittest.TestCase):

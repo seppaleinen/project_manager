@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-from gitManager import *
+from git_manager import *
 import os
 import unittest
 

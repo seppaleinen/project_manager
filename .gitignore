@@ -2,6 +2,7 @@
 build*
 dist*
 pythontest.egg-info*
+python.egg-info*
 .idea
 *.egg
 target*

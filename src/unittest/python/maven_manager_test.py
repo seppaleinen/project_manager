@@ -3,7 +3,7 @@
 
 import unittest
 import os
-from mavenManager import MavenManager
+from maven_manager import MavenManager
 
 
 project_dir = os.getcwd()

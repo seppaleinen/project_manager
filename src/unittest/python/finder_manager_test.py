@@ -2,7 +2,7 @@
 
 
 import unittest
-from finderManager import *
+from finder_manager import *
 from packagefile import get_workspace
 
 

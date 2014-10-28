@@ -2,7 +2,7 @@
 
 
 import unittest
-from serverManager import ServerManager
+from server_manager import ServerManager
 
 
 class doTests(unittest.TestCase):
