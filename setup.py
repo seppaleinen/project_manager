@@ -1,8 +1,8 @@
 from setuptools import setup
     
 setup(
-    name='pythontest',
-    version='0.0.1',
+    name='python',
+    version='1.0-SNAPSHOT',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
     packages=[ 'src/main/python' ],
