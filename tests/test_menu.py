@@ -70,6 +70,21 @@ class doTests(unittest.TestCase):
         finally:
             sys.stdout = saved_stdout
 
+    def test_compile_build_py(self):
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            GIT_REPO=os.getcwd() + '/tests/resources/pybuild/.git'
+            pull_result='OK'
+            compiler(GIT_REPO, pull_result)
+
+            output = out.getvalue().strip()
+            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/pybuild/build.py'
+            assert output == expected_output
+        finally:
+            sys.stdout = saved_stdout
+
 
 
 if __name__ == '__main__':
