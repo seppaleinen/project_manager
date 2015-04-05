@@ -5,8 +5,8 @@ setup(
     version='1.0-SNAPSHOT',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
-    packages=[ 'src/main/python' ],
-    scripts=[ 'src/main/scripts/binfile' ],
+    packages=[ 'python_dir' ],
+    scripts=[ 'scripts/binfile' ],
     url='www.google.se',
     zip_safe=False,
     license='GPLv3',
@@ -24,5 +24,5 @@ setup(
     #    "wsgiref>=0.1.2",
     #    "xerox"
     #],
-    test_suite='src/unittest/python',
+    test_suite='tests',
 )

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-from menu import Menu, compiler
+from python_dir.menu import Menu, compiler
 import os
 import unittest
 import sys
@@ -31,7 +31,7 @@ class doTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/src/unittest/resources/pom/.git'
+            GIT_REPO=os.getcwd() + '/tests/resources/pom/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
@@ -45,12 +45,12 @@ class doTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/src/unittest/resources/gradle/.git'
+            GIT_REPO=os.getcwd() + '/tests/resources/gradle/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/src/unittest/resources/gradle/build.gradle'
+            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/gradle/build.gradle'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
@@ -60,12 +60,12 @@ class doTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/src/unittest/resources/setup/.git'
+            GIT_REPO=os.getcwd() + '/tests/resources/setup/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/src/unittest/resources/setup/setup.py'
+            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/setup/setup.py'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout

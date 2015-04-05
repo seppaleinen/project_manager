@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import os
-from menu import Menu
+from python_dir.menu import Menu
 
 
 if __name__ == '__main__':

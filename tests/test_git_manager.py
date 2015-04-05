@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-from git_manager import *
+from python_dir.git_manager import *
 import os
 import unittest
 
@@ -14,7 +14,7 @@ class doTests(unittest.TestCase):
 		result = git_pull(project_dir)
 		self.failUnless(result == 'OK')
 	def test_git_checkout(self):
-		branch = "pybuilder"
+		branch = "master"
 		result = git_checkout(project_dir, branch)
 		self.failUnless(result == 'OK')
 	def test_git_check_for_updates(self):
