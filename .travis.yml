@@ -4,6 +4,6 @@ python:
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -r requirements.txt
 # command to run tests, e.g. python setup.py test
-script: coverage run --source src/main setup.py test
+script: coverage run --source python_dir setup.py test
 
 after_success: coveralls
