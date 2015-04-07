@@ -12,4 +12,4 @@ def find_all_git_dirs(workspace):
     """
     return [os.path.join(dirpath, f)
             for dirpath, dirnames, files in os.walk(workspace)
-            for f in dirnames if f.endswith('.git')]
+            for f in dirnames if f.endswith('.git') and files is not None]
