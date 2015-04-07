@@ -21,11 +21,6 @@ class doTests(unittest.TestCase):
         os.environ["WORKSPACE"] = os.getcwd() + "/.git"
         Menu(user_input='3', test=True)
 
-    def test_compile_build_py(self):
-        GIT_REPO=os.getcwd() + '/.git'
-        pull_result='OK'
-        compiler(GIT_REPO, pull_result)
-
     def test_compile_pom_xml(self):
         saved_stdout = sys.stdout
         try:
