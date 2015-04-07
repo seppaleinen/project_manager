@@ -4,7 +4,7 @@
 import subprocess
 
 
-class MavenManager():
+class MavenManager(object):
     def mavify_pom_file(self, path_to_pom):
         maven_result = subprocess.Popen(['mvn', 'clean', 'install', '-f', path_to_pom],
                                         stdout=subprocess.PIPE).communicate()[0]

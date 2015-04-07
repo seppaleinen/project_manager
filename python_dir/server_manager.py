@@ -4,7 +4,7 @@
 import subprocess
 
 
-class ServerManager:
+class ServerManager(object):
     def __init__(self, ps="jboss"):
         self.ps = ps
 
