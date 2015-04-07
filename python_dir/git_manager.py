@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from git import Repo
+from git import Repo, GitCommandError
 
 
 def git_pull(git_repo):
