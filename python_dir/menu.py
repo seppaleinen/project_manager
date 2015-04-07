@@ -26,7 +26,7 @@ def compiler(GIT_REPO, pull_result):
             print('Compile %s' % (build_file))
 
 
-class Menu():
+class Menu(object):
     def __init__(self, user_input=None, test=False):
         loop = True
         while loop:
@@ -75,7 +75,7 @@ class Menu():
             if branch_list:
                 for branch in branch_list:
                     print "Branch %s in %s is outdated" % (branch, GIT_REPO)
-                    checkout_result = git_checkout(GIT_REPO, branch)
+                    git_checkout(GIT_REPO, branch)
                     pull_result = git_pull(GIT_REPO)
                     compiler(GIT_REPO, pull_result)
             else:
@@ -89,6 +89,4 @@ class Menu():
         :return:
         """
         for GIT_REPO in find_all_git_dirs(get_workspace()):
-            result = git_check_for_uncommitted_changes(GIT_REPO)
-            if result is not None:
-                print(result)
+            git_check_for_uncommitted_changes(GIT_REPO)
