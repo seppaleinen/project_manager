@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from git import *
+from git import Repo
 
 
 def git_pull(git_repo):
@@ -38,10 +38,10 @@ def git_checkout(git_repo, branch):
 
 def git_check_for_updates(git_repo):
     """
-  	Check for updates on remote
-	Does git remote show origin,
-	then if there are out of dates
-	parse the branch-name from row and return
+    Check for updates on remote
+    Does git remote show origin,
+    then if there are out of dates
+    parse the branch-name from row and return
 
     :param git_repo:
     :return List:
