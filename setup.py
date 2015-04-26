@@ -12,10 +12,10 @@ setup(
     license='GPLv3',
     description='Python test.',
     install_requires=[
-        "gitPython>=0.3.1"
+        "gitPython==1.0.0"
     ],
     tests_require=[
-        "gitPython>=0.3.1"
+        "gitPython==1.0.0"
     ],
     #install_requires=[
     #    "args>=0.1.0",
