@@ -127,6 +127,51 @@ class doTests(unittest.TestCase):
         pull_mock('git_repo')
         compiler_mock('git_repo', mock.ANY)
 
+    @mock.patch('python_dir.menu.get_workspace')
+    @mock.patch('python_dir.menu.git_check_for_updates')
+    @mock.patch('python_dir.menu.find_all_git_dirs')
+    def test_update_git_repos_no_updates(
+        self,
+        find_all_mock,
+        git_check_mock,
+        workspace_mock
+        ):
+        workspace_mock.return_value = 'workspace'
+        find_all_mock.return_value = [ 'git_repo' ]
+        git_check_mock.return_value = []
+
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            Menu(user_input='2', test=True)
+            output = out.getvalue().strip()
+            self.assertTrue('All Branches in git_repo is updated' in output)
+        finally:
+            sys.stdout = saved_stdout
+
+        workspace_mock.assert_called_with()
+        find_all_mock.assert_called_with('workspace')
+        git_check_mock.assert_called_with('git_repo')
+
+    @mock.patch('python_dir.menu.get_workspace')
+    @mock.patch('python_dir.menu.git_check_for_uncommitted_changes')
+    @mock.patch('python_dir.menu.find_all_git_dirs')
+    def test_check_for_uncommitted_changes(
+        self,
+        find_all_mock,
+        git_changes_mock,
+        workspace_mock
+        ):
+        workspace_mock.return_value = 'workspace'
+        find_all_mock.return_value = [ 'git_repo' ]
+
+        Menu(user_input='3', test=True)
+
+        workspace_mock.assert_called_with()
+        find_all_mock.assert_called_with('workspace')
+        git_changes_mock.assert_called_with('git_repo')
+
 
 if __name__ == '__main__':
     unittest.main()
