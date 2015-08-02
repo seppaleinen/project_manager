@@ -8,28 +8,7 @@ import sys
 import mock
 from StringIO import StringIO
 
-
-class doTests(unittest.TestCase):
-    #def test_menu_check_git_repos(self):
-    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-    #    Menu(user_input='1', test=True)
-
-    #def test_menu_update_git_repos(self):
-    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-    #    Menu(user_input='2', test=True)
-
-    def test_menu_check_for_uncommitted_repos(self):
-        os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-        Menu(user_input='3', test=True)
-
-    def test_menu_unknown_command(self):
-        Menu(user_input='4', test=True)
-
-    @mock.patch('__builtin__.raw_input')
-    def test_menu_no_input(self, mocked):
-        Menu(test=True)
-        mocked.assert_called_with('')
-
+class doCompilerTests(unittest.TestCase):
     def test_compile_pom_xml(self):
         saved_stdout = sys.stdout
         try:
@@ -88,6 +67,28 @@ class doTests(unittest.TestCase):
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
+
+
+class doMenuTests(unittest.TestCase):
+    #def test_menu_check_git_repos(self):
+    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
+    #    Menu(user_input='1', test=True)
+
+    #def test_menu_update_git_repos(self):
+    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
+    #    Menu(user_input='2', test=True)
+
+    #def test_menu_check_for_uncommitted_repos(self):
+    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
+    #    Menu(user_input='3', test=True)
+
+    def test_menu_unknown_command(self):
+        Menu(user_input='4', test=True)
+
+    @mock.patch('__builtin__.raw_input')
+    def test_menu_no_input(self, mocked):
+        Menu(test=True)
+        mocked.assert_called_with('')
 
     @mock.patch('python_dir.menu.get_workspace')
     @mock.patch('python_dir.menu.git_check_for_updates')
