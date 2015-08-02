@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 import unittest, os, sys, mock
 from python_dir.menu import Menu, compiler
 from StringIO import StringIO
@@ -78,14 +79,17 @@ class doMenuTests(unittest.TestCase):
 
     @mock.patch('python_dir.menu.get_workspace')
     @mock.patch('python_dir.menu.git_check_for_updates')
-    @mock.patch('python_dir.menu.find_all_git_dirs')
-    def test_check_git_repos(self, find_all_mock, check_updates_mock, workspace_mock):
+    @mock.patch('python_dir.menu.FinderManager')
+    def test_check_git_repos(self, find_mock, check_updates_mock, workspace_mock):
         workspace_mock.return_value = "workspace"
-        find_all_mock.return_value = [ 'git_repo' ]
+        find_mock.return_value = find_mock
+        find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
         check_updates_mock.return_value = [ 'master' ]
+
         menu = Menu(user_input='1', test=True)
+
         workspace_mock.assert_called_with()
-        find_all_mock.assert_called_with(mock.ANY)
+        find_mock.find_all_git_dirs.assert_called_with(mock.ANY)
         check_updates_mock.assert_called_with('git_repo')
 
     @mock.patch('python_dir.menu.compiler')
@@ -93,10 +97,10 @@ class doMenuTests(unittest.TestCase):
     @mock.patch('python_dir.menu.git_checkout')
     @mock.patch('python_dir.menu.get_workspace')
     @mock.patch('python_dir.menu.git_check_for_updates')
-    @mock.patch('python_dir.menu.find_all_git_dirs')
+    @mock.patch('python_dir.menu.FinderManager')
     def test_update_git_repos(
         self, 
-        find_all_mock, 
+        find_mock, 
         git_check_mock, 
         workspace_mock, 
         checkout_mock, 
@@ -104,11 +108,14 @@ class doMenuTests(unittest.TestCase):
         compiler_mock
         ):
         workspace_mock.return_value = 'workspace'
-        find_all_mock.return_value = [ 'git_repo' ]
+        find_mock.return_value = find_mock
+        find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
         git_check_mock.return_value = [ 'branch' ]
+
         Menu(user_input='2', test=True)
+
         workspace_mock.assert_called_with()
-        find_all_mock.assert_called_with('workspace')
+        find_mock.find_all_git_dirs.assert_called_with('workspace')
         git_check_mock.assert_called_with('git_repo')
         checkout_mock.assert_called_with('git_repo', 'branch')
         pull_mock('git_repo')
@@ -116,15 +123,16 @@ class doMenuTests(unittest.TestCase):
 
     @mock.patch('python_dir.menu.get_workspace')
     @mock.patch('python_dir.menu.git_check_for_updates')
-    @mock.patch('python_dir.menu.find_all_git_dirs')
+    @mock.patch('python_dir.menu.FinderManager')
     def test_update_git_repos_no_updates(
         self,
-        find_all_mock,
+        find_mock,
         git_check_mock,
         workspace_mock
         ):
         workspace_mock.return_value = 'workspace'
-        find_all_mock.return_value = [ 'git_repo' ]
+        find_mock.return_value = find_mock
+        find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
         git_check_mock.return_value = []
 
         saved_stdout = sys.stdout
@@ -138,25 +146,26 @@ class doMenuTests(unittest.TestCase):
             sys.stdout = saved_stdout
 
         workspace_mock.assert_called_with()
-        find_all_mock.assert_called_with('workspace')
+        find_mock.find_all_git_dirs.assert_called_with('workspace')
         git_check_mock.assert_called_with('git_repo')
 
     @mock.patch('python_dir.menu.get_workspace')
     @mock.patch('python_dir.menu.git_check_for_uncommitted_changes')
-    @mock.patch('python_dir.menu.find_all_git_dirs')
+    @mock.patch('python_dir.menu.FinderManager')
     def test_check_for_uncommitted_changes(
         self,
-        find_all_mock,
+        find_mock,
         git_changes_mock,
         workspace_mock
         ):
         workspace_mock.return_value = 'workspace'
-        find_all_mock.return_value = [ 'git_repo' ]
+        find_mock.return_value = find_mock
+        find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
 
         Menu(user_input='3', test=True)
 
         workspace_mock.assert_called_with()
-        find_all_mock.assert_called_with('workspace')
+        find_mock.find_all_git_dirs.assert_called_with('workspace')
         git_changes_mock.assert_called_with('git_repo')
 
 

@@ -2,7 +2,7 @@
 
 
 from packagefile import get_workspace
-from finder_manager import find_all_git_dirs
+from finder_manager import FinderManager
 from git_manager import (
     git_checkout, 
     git_check_for_updates, 
@@ -57,7 +57,7 @@ class Menu(object):
         and print results
         :return None:
         """
-        for GIT_REPO in find_all_git_dirs(get_workspace()):
+        for GIT_REPO in FinderManager().find_all_git_dirs(get_workspace()):
             branch_list = git_check_for_updates(GIT_REPO)
             if branch_list:
                 for branch in branch_list:
@@ -72,7 +72,7 @@ class Menu(object):
         and compile.
         :return None:
         """
-        for GIT_REPO in find_all_git_dirs(get_workspace()):
+        for GIT_REPO in FinderManager().find_all_git_dirs(get_workspace()):
             branch_list = git_check_for_updates(GIT_REPO)
             if branch_list:
                 for branch in branch_list:
@@ -90,5 +90,5 @@ class Menu(object):
         and print result
         :return:
         """
-        for GIT_REPO in find_all_git_dirs(get_workspace()):
+        for GIT_REPO in FinderManager().find_all_git_dirs(get_workspace()):
             git_check_for_uncommitted_changes(GIT_REPO)
