@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-import unittest
+
+import unittest, os, mock
 from python_dir.packagefile import get_workspace, input_from_user
-from os.path import expanduser
-import mock
 
 
 class doTests(unittest.TestCase):
     def test_get_workspace(self):
+        os.environ["WORKSPACE"] = os.getcwd()
         workspace = get_workspace()
-        home_dir = expanduser("~")
         self.failIf(workspace is None)
+        self.assertEqual(os.getcwd(), workspace)
 
     @mock.patch('__builtin__.input')
     def test_get_input(self, mocked):

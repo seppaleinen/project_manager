@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-
+import unittest, os, mock
 from python_dir.git_manager import ( 
     git_pull, 
     git_checkout, 
@@ -8,8 +8,6 @@ from python_dir.git_manager import (
     git_check_for_uncommitted_changes, 
     GitCommandError
     )
-import os, unittest, mock
-
 
 project_dir = os.getcwd()
 

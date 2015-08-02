@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-
+import unittest, os, sys, mock
 from python_dir.menu import Menu, compiler
-import os, unittest, sys, mock
 from StringIO import StringIO
+
+resources_dir = os.getcwd() + '/tests/resources'
 
 class doCompilerTests(unittest.TestCase):
     def test_compile_pom_xml(self):
@@ -11,7 +12,7 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/unittests/resources/pom/.git'
+            GIT_REPO=resources_dir + '/pom/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
@@ -25,12 +26,12 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/unittests/resources/gradle/.git'
+            GIT_REPO=resources_dir + '/gradle/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/gradle/build.gradle'
+            expected_output = 'Compile ' + resources_dir + '/gradle/build.gradle'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
@@ -40,12 +41,12 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/unittests/resources/setup/.git'
+            GIT_REPO=resources_dir + '/setup/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/setup/setup.py'
+            expected_output = 'Compile ' + resources_dir + '/setup/setup.py'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
@@ -55,30 +56,18 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/unittests/resources/pybuild/.git'
+            GIT_REPO=resources_dir + '/pybuild/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/pybuild/build.py'
+            expected_output = 'Compile ' + resources_dir + '/pybuild/build.py'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
 
 
 class doMenuTests(unittest.TestCase):
-    #def test_menu_check_git_repos(self):
-    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-    #    Menu(user_input='1', test=True)
-
-    #def test_menu_update_git_repos(self):
-    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-    #    Menu(user_input='2', test=True)
-
-    #def test_menu_check_for_uncommitted_repos(self):
-    #    os.environ["WORKSPACE"] = os.getcwd() + "/.git"
-    #    Menu(user_input='3', test=True)
-
     def test_menu_unknown_command(self):
         Menu(user_input='4', test=True)
 
