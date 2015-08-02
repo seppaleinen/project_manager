@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 import unittest
-from python_dir.packagefile import get_workspace
-from python_dir.packagefile import input_from_user
+from python_dir.packagefile import get_workspace, input_from_user
 from os.path import expanduser
 import mock
 
 
-class doTests(unittest.TestCase):
+class doIntegrationTests(unittest.TestCase):
     def test_get_workspace(self):
         workspace = get_workspace()
         home_dir = expanduser("~")

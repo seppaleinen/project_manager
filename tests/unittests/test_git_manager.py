@@ -1,10 +1,14 @@
 #!/usr/bin/python
 
 
-from python_dir.git_manager import *
-import os
-import unittest
-import mock
+from python_dir.git_manager import ( 
+    git_pull, 
+    git_checkout, 
+    git_check_for_updates, 
+    git_check_for_uncommitted_changes, 
+    GitCommandError
+    )
+import os, unittest, mock
 
 
 project_dir = os.getcwd()

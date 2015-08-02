@@ -3,10 +3,12 @@
 
 from packagefile import get_workspace
 from finder_manager import find_all_git_dirs
-from git_manager import git_checkout
-from git_manager import git_check_for_updates
-from git_manager import git_pull
-from git_manager import git_check_for_uncommitted_changes
+from git_manager import (
+    git_checkout, 
+    git_check_for_updates, 
+    git_pull, 
+    git_check_for_uncommitted_changes
+    )
 from compiling_manager import CompilingManager
 from maven_manager import MavenManager
 

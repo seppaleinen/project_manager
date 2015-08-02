@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 
-import unittest
-from python_dir.finder_manager import *
+import unittest, os
+from python_dir.finder_manager import find_all_git_dirs
 from python_dir.packagefile import get_workspace
 
 

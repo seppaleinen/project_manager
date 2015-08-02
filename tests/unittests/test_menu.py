@@ -2,10 +2,7 @@
 
 
 from python_dir.menu import Menu, compiler
-import os
-import unittest
-import sys
-import mock
+import os, unittest, sys, mock
 from StringIO import StringIO
 
 class doCompilerTests(unittest.TestCase):
@@ -14,7 +11,7 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/resources/pom/.git'
+            GIT_REPO=os.getcwd() + '/tests/unittests/resources/pom/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
@@ -28,12 +25,12 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/resources/gradle/.git'
+            GIT_REPO=os.getcwd() + '/tests/unittests/resources/gradle/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/gradle/build.gradle'
+            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/gradle/build.gradle'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
@@ -43,12 +40,12 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/resources/setup/.git'
+            GIT_REPO=os.getcwd() + '/tests/unittests/resources/setup/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/setup/setup.py'
+            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/setup/setup.py'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
@@ -58,12 +55,12 @@ class doCompilerTests(unittest.TestCase):
         try:
             out = StringIO()
             sys.stdout = out
-            GIT_REPO=os.getcwd() + '/tests/resources/pybuild/.git'
+            GIT_REPO=os.getcwd() + '/tests/unittests/resources/pybuild/.git'
             pull_result='OK'
             compiler(GIT_REPO, pull_result)
 
             output = out.getvalue().strip()
-            expected_output = 'Compile ' + os.getcwd() + '/tests/resources/pybuild/build.py'
+            expected_output = 'Compile ' + os.getcwd() + '/tests/unittests/resources/pybuild/build.py'
             assert output == expected_output
         finally:
             sys.stdout = saved_stdout
