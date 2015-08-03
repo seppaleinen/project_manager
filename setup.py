@@ -1,4 +1,6 @@
 from setuptools import setup
+from setuptools_behave import behave_test
+
     
 setup(
     name='python',
@@ -15,7 +17,8 @@ setup(
         "gitPython==1.0.1"
     ],
     tests_require=[
-        "gitPython==1.0.1"
+        "gitPython==1.0.1",
+        "behave==1.2.5"
     ],
     #install_requires=[
     #    "args>=0.1.0",
@@ -25,4 +28,9 @@ setup(
     #    "xerox"
     #],
     test_suite='tests',
+    cmdclass = {
+        "behave": behave_test,
+    },
 )
+
+
