@@ -8,73 +8,66 @@ from StringIO import StringIO
 resources_dir = os.getcwd() + '/tests/resources'
 
 class doCompilerTests(unittest.TestCase):
-    def test_compile_pom_xml(self):
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            GIT_REPO=resources_dir + '/pom/.git'
-            pull_result='OK'
-            compiler(GIT_REPO, pull_result)
+    def setUp(self):
+        self.saved_stdout = sys.stdout
+        self.out = StringIO()
+        sys.stdout = self.out
 
-            output = out.getvalue().strip()
-            assert output == 'Compileresult: OK'
-        finally:
-            sys.stdout = saved_stdout
+    def tearDown(self):
+        sys.stdout = self.saved_stdout
+
+    def test_compile_pom_xml(self):
+        GIT_REPO=resources_dir + '/pom/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
+
+        output = self.out.getvalue().strip()
+        assert output == 'Compileresult: OK'
 
     def test_compile_build_gradle(self):
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            GIT_REPO=resources_dir + '/gradle/.git'
-            pull_result='OK'
-            compiler(GIT_REPO, pull_result)
+        GIT_REPO=resources_dir + '/gradle/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
 
-            output = out.getvalue().strip()
-            expected_output = 'Compile ' + resources_dir + '/gradle/build.gradle'
-            assert output == expected_output
-        finally:
-            sys.stdout = saved_stdout
+        output = self.out.getvalue().strip()
+        expected_output = 'Compile ' + resources_dir + '/gradle/build.gradle'
+        assert output == expected_output
 
     def test_compile_setup_py(self):
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            GIT_REPO=resources_dir + '/setup/.git'
-            pull_result='OK'
-            compiler(GIT_REPO, pull_result)
+        GIT_REPO=resources_dir + '/setup/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
 
-            output = out.getvalue().strip()
-            expected_output = 'Compile ' + resources_dir + '/setup/setup.py'
-            assert output == expected_output
-        finally:
-            sys.stdout = saved_stdout
+        output = self.out.getvalue().strip()
+        expected_output = 'Compile ' + resources_dir + '/setup/setup.py'
+        assert output == expected_output
 
     def test_compile_build_py(self):
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            GIT_REPO=resources_dir + '/pybuild/.git'
-            pull_result='OK'
-            compiler(GIT_REPO, pull_result)
+        GIT_REPO=resources_dir + '/pybuild/.git'
+        pull_result='OK'
+        compiler(GIT_REPO, pull_result)
 
-            output = out.getvalue().strip()
-            expected_output = 'Compile ' + resources_dir + '/pybuild/build.py'
-            assert output == expected_output
-        finally:
-            sys.stdout = saved_stdout
+        output = self.out.getvalue().strip()
+        expected_output = 'Compile ' + resources_dir + '/pybuild/build.py'
+        assert output == expected_output
 
 
 class doMenuTests(unittest.TestCase):
+    def setUp(self):
+        self.saved_stdout = sys.stdout
+        self.out = StringIO()
+        sys.stdout = self.out
+
+    def tearDown(self):
+        sys.stdout = self.saved_stdout
+
     def test_menu_unknown_command(self):
         Menu(user_input='4', test=True)
 
     @mock.patch('__builtin__.raw_input')
     def test_menu_no_input(self, mocked):
         Menu(test=True)
+
         mocked.assert_called_with('')
 
     @mock.patch('python_dir.menu.get_workspace')
@@ -85,8 +78,10 @@ class doMenuTests(unittest.TestCase):
         find_mock.return_value = find_mock
         find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
         check_updates_mock.return_value = [ 'master' ]
-
-        menu = Menu(user_input='1', test=True)
+        
+        Menu(user_input='1', test=True)
+        output = self.out.getvalue().strip()
+        self.assertTrue('Branch master in git_repo is outdated' in output)
 
         workspace_mock.assert_called_with()
         find_mock.find_all_git_dirs.assert_called_with(mock.ANY)
@@ -105,7 +100,7 @@ class doMenuTests(unittest.TestCase):
         workspace_mock, 
         checkout_mock, 
         pull_mock, 
-        compiler_mock
+        compiler_mock,
         ):
         workspace_mock.return_value = 'workspace'
         find_mock.return_value = find_mock
@@ -113,6 +108,8 @@ class doMenuTests(unittest.TestCase):
         git_check_mock.return_value = [ 'branch' ]
 
         Menu(user_input='2', test=True)
+        output = self.out.getvalue().strip()
+        self.assertTrue('Branch branch in git_repo is outdated' in output)
 
         workspace_mock.assert_called_with()
         find_mock.find_all_git_dirs.assert_called_with('workspace')
@@ -135,15 +132,9 @@ class doMenuTests(unittest.TestCase):
         find_mock.find_all_git_dirs.return_value = [ 'git_repo' ]
         git_check_mock.return_value = []
 
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            Menu(user_input='2', test=True)
-            output = out.getvalue().strip()
-            self.assertTrue('All Branches in git_repo is updated' in output)
-        finally:
-            sys.stdout = saved_stdout
+        Menu(user_input='2', test=True)
+        output = self.out.getvalue().strip()
+        self.assertTrue('All Branches in git_repo is updated' in output)
 
         workspace_mock.assert_called_with()
         find_mock.find_all_git_dirs.assert_called_with('workspace')

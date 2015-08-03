@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-import unittest, os, mock
+import unittest, os, mock, sys
 from python_dir.git_manager import ( 
     git_pull, 
     git_checkout, 
@@ -9,6 +9,7 @@ from python_dir.git_manager import (
     git_check_for_uncommitted_changes, 
     GitCommandError
     )
+from StringIO import StringIO
 
 project_dir = os.getcwd()
 
@@ -70,7 +71,16 @@ class doTests(unittest.TestCase):
     def test_git_check_for_uncommitted_changes(self, mocked):
         mocked.return_value = mocked
         mocked.git._call_process.return_value = "Changes not staged for commit"
-        result = git_check_for_uncommitted_changes(project_dir)
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+            result = git_check_for_uncommitted_changes(project_dir)
+            output = out.getvalue().strip()
+            self.assertTrue('has uncommitted changes' in output)
+        finally:
+            sys.stdout = saved_stdout
+
         mocked.assert_called_with(project_dir)
         mocked.git._call_process.assert_called_with('status')    
 
