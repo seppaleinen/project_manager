@@ -4,7 +4,7 @@ from setuptools_behave import behave_test
     
 setup(
     name='python',
-    version='1.0-SNAPSHOT',
+    version='1.0.0',
     author='David Eriksson',
     author_email='david.eriksson@swedenmail.com',
     packages=[ 'python_dir' ],

@@ -27,7 +27,10 @@ class doTests(unittest.TestCase):
     def test_git_pull_pass_error(self, mocked):
         mocked.return_value = mocked
         mocked.git._call_process.side_effect = GitCommandError('Error', 'Message')
-        self.assertRaises(GitCommandError, git_pull(project_dir))
+        try:
+            git_pull(project_dir)
+        except GitCommandError, e:
+            self.assertEquals( "Error", e.msg )
         mocked.assert_called_with(project_dir)
         mocked.git._call_process.assert_called_with("pull")
 
@@ -45,7 +48,10 @@ class doTests(unittest.TestCase):
         mocked.return_value = mocked
         mocked.git._call_process.side_effect = GitCommandError('Error', 'Message')
         branch = "master"
-        self.assertRaises(GitCommandError, git_checkout(project_dir, branch))
+        try:
+            git_checkout(project_dir, branch)
+        except GitCommandError, e:
+            self.assertEquals( "Error", e.msg )
         mocked.assert_called_with(project_dir)
         mocked.git._call_process.assert_called_with('checkout', branch)
 
