@@ -2,6 +2,6 @@ gitPython==1.0.1
 setuptools==18.3.2
 coverage==4.0
 coveralls==1.0
-codecov==1.4.1
+codecov==1.5.1
 mock==1.3.0
 behave==1.2.5
