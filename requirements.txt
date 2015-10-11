@@ -1,5 +1,5 @@
 gitPython==1.0.1
-setuptools==18.3.2
+setuptools==18.4
 coverage==4.0
 coveralls==1.0
 codecov==1.5.1

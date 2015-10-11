@@ -28,4 +28,6 @@ class ServerManager(object):
         """
         process = self.check_jboss_status()
         if process is not None:
-            return process.split(split_delimiter)[1].split(' ')[0]
+            split_process = process.split(split_delimiter)[0]
+            if split_process is not None:
+                return split_process.split(' ')[0]
